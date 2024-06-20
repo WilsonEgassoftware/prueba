@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese la tarifa inicial: ");
+        double tarifaInicial = scanner.nextDouble();
+        System.out.print("Ingrese la hora inicial (entre 6 y 21): ");
+        int horaInicial = scanner.nextInt();
+
+        Parqueadero parqueadero = new Parqueadero(tarifaInicial, horaInicial);
+
+        while (true) {
+            System.out.println("\nMenú:");
+            System.out.println("1. Ingresar carro");
+            System.out.println("2. Dar salida a carro");
+            System.out.println("3. Informar ingresos del parqueadero");
+            System.out.println("4. Consultar cantidad de puestos disponibles");
+            System.out.println("5. Avanzar reloj");
+            System.out.println("6. Cambiar tarifa");
+            System.out.println("7. Salir");
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese la placa del carro: ");
+                    String placa = scanner.next();
+                    System.out.print("Ingrese la hora de entrada: ");
+                    int horaEntrada = scanner.nextInt();
+                    parqueadero.ingresarCarro(placa, horaEntrada);
+                    break;
+                case 2:
+                    System.out.print("Ingrese la placa del carro: ");
+                    placa = scanner.next();
+                    parqueadero.darSalidaCarro(placa);
+                    break;
+                case 3:
+                    System.out.println("Ingresos del parqueadero: $" + parqueadero.getIngresos());
+                    break;
+                case 4:
+                    System.out.println("Puestos disponibles: " + parqueadero.getPuestosDisponibles());
+                    break;
+                case 5:
+                    System.out.print("Ingrese la cantidad de horas a avanzar: ");
+                    int horas = scanner.nextInt();
+                    parqueadero.avanzarReloj(horas);
+                    break;
+                case 6:
+                    System.out.print("Ingrese la nueva tarifa: ");
+                    double nuevaTarifa = scanner.nextDouble();
+                    parqueadero.cambiarTarifa(nuevaTarifa);
+                    break;
+                case 7:
+                    System.out.println("Saliendo del programa...");
+                    return;
+                default:
+                    System.out.println("Opción inválida. Intente de nuevo.");
+            }
+        }
+    }
+}
